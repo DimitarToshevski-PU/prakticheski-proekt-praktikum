@@ -63,15 +63,21 @@ function createMovieCard(movie) {
   return `
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-4">
         <div class="card justify-content-center align-items-center">
-          <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" class="card-img-top" alt="..." />
+          <img src="${
+            movie.poster_path
+              ? 'https://image.tmdb.org/t/p/w200' + movie.poster_path
+              : './images/no-cover.png'
+          }" class="card-img-top" alt="" />
           <div class="card-body">
             <div class="d-flex justify-content-between">
-                <span class="badge badge-pill badge-warning initial-view">Raiting: ${movie.vote_average}</span>
-                <span class="badge badge-pill badge-warning initial-view">Date: ${movie.release_date}</span>
+                <span class="badge badge-pill badge-warning initial-view">Raiting: ${
+                  movie.vote_average
+                }</span>
+                <span class="badge badge-pill badge-warning initial-view">Date: ${
+                  movie.release_date
+                }</span>
             </div>
-            <div>
-                <span class="badge badge-pill badge-primary initial-view">${movieGenres}</span>
-            </div>
+            <span class="badge badge-pill badge-primary initial-view">${movieGenres}</span>
             <h5 class="card-title">${movie.title}</h5>
             <p class="card-text detail-view">
               ${movie.overview}
@@ -89,7 +95,10 @@ function getDataByUrl(url, cb) {
 }
 
 function filterMovies() {
-  const filters = $('#filters-form').serialize();
+  const filters = $('#filters-form')
+    .serialize()
+    .replaceAll(/&with_genres=/g, ',');
+
   getDataByUrl(moviesUrl + '&' + filters, (response) => {
     appendMovies(response.results);
   });
