@@ -1,6 +1,7 @@
 const API_KEY = '08b1ca0383a4440da82df7eea37f3691';
 const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
 const moviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+
 let genres = {};
 
 $(document).ready(function () {
@@ -24,13 +25,12 @@ $(document).ready(function () {
     updateView('#detail-view');
   });
 
-  $('#filters-submit').on('click', () => {
-    filterMovies();
-  });
+  $('#filters-submit').on('click', filterMovies);
 });
 
 function appendMovies(movies) {
   const moviesContainer = $('#movies-container');
+
   moviesContainer.empty();
 
   movies.forEach((movie) => {
