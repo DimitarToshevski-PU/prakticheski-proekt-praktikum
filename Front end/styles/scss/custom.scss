@@ -1,14 +1,6 @@
-.badge {
+.badge-holder {
   position: relative;
-  top: -22px;
-}
-
-.card-title {
-  line-height: 1;
-}
-
-.card-body {
-  padding: 0.75rem;
+  top: -29px;
 }
 
 .checkbox {
@@ -21,4 +13,8 @@
 
 .radius {
   border-radius: 20px;
+}
+
+.detail-view {
+  display: none;
 }

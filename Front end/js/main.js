@@ -3,6 +3,7 @@ const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_K
 const moviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 
 let genres = {};
+let chosenViewId;
 
 $(document).ready(function () {
   getDataByUrl(genresUrl, (response) => {
@@ -63,19 +64,19 @@ function createMovieCard(movie) {
             movie.poster_path
               ? 'https://image.tmdb.org/t/p/w200' + movie.poster_path
               : './images/no-cover.png'
-          }" class="card-img-top" alt="" />
-          <div class="card-body w-100">
-            <div class="d-flex justify-content-between">
-                <span class="badge badge-pill badge-warning initial-view">Raiting: ${
+          }" class="card-img-top" alt="no image found" />
+          <div class="card-body w-100 h-100">
+            <div class="d-flex justify-content-between badge-holder">
+                <span class="badge badge-pill badge-warning">Raiting: ${
                   movie.vote_average
                 }</span>
-                <span class="badge badge-pill badge-warning initial-view">Date: ${
+                <span class="badge badge-pill badge-warning">Date: ${
                   movie.release_date
                 }</span>
             </div>
-            <span class="badge badge-pill badge-primary initial-view">${movieGenres}</span>
+            <span class="badge badge-pill badge-primary d-none d-sm-inline-block">${movieGenres}</span>
             <h5 class="card-title text-center">${movie.title}</h5>
-            <p class="card-text d-none">
+            <p class="card-text detail-view">
               ${movie.overview}
             </p>
           </div>
@@ -103,6 +104,7 @@ function filterMovies() {
 
   getDataByUrl(moviesUrl + '&' + filters, (response) => {
     appendMovies(response.results);
+    updateView(chosenViewId);
   });
 }
 
@@ -119,6 +121,21 @@ function setupEventListeners() {
 }
 
 function updateView(viewId) {
+  chosenViewId = viewId;
   $(viewId).siblings('li').children('a').removeClass('active');
   $(viewId + ' a').addClass('nav-link active');
+
+  if (viewId === '#initial-view') {
+    $('.card').removeClass('flex-lg-row');
+    $('.card-body').removeClass('mt-3 mt-lg-0');
+    $('.detail-view').css({ display: 'none' });
+    $('.badge-holder').css({ left: '0' });
+    $('.card-img-top').css({ width: '100%', 'margin-left': '0' });
+  } else {
+    $('.card').addClass('flex-lg-row');
+    $('.card-body').addClass('mt-3 mt-lg-0');
+    $('.detail-view').css({ display: 'flex' });
+    $('.badge-holder').css({ left: '-120px' });
+    $('.card-img-top').css({ width: '100px', 'margin-left': '20px' });
+  }
 }
