@@ -1,0 +1,29 @@
+{
+  "name": "prakticheski-proekt-praktikum",
+  "version": "1.0.0",
+  "description": "Практически проект - практикум",
+  "scripts": {
+    "start": "gulp scss && gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimitarToshevski-PU/prakticheski-proekt-praktikum.git"
+  },
+  "author": "Dimitar Toshevski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DimitarToshevski-PU/prakticheski-proekt-praktikum/issues"
+  },
+  "homepage": "https://github.com/DimitarToshevski-PU/prakticheski-proekt-praktikum#readme",
+  "dependencies": {
+    "bootstrap": "~4.5.3"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0"
+  }
+}
