@@ -17,16 +17,16 @@ $(document).ready(function () {
     });
   });
 
-  $('#initial-view').on('click', () => {
-    updateView('#initial-view');
-  });
-
-  $('#detail-view').on('click', () => {
-    updateView('#detail-view');
-  });
-
-  $('#filters-submit').on('click', filterMovies);
+  setupEventListeners();
 });
+
+function appendGenres(genres) {
+  const genresContainer = $('#genres-container');
+
+  genres.forEach((genre) => {
+    genresContainer.append(createGenreCheckbox(genre));
+  });
+}
 
 function appendMovies(movies) {
   const moviesContainer = $('#movies-container');
@@ -40,14 +40,6 @@ function appendMovies(movies) {
   } else {
     moviesContainer.text('No movies have been found for the current filters.');
   }
-}
-
-function appendGenres(genres) {
-  const genresContainer = $('#genres-container');
-
-  genres.forEach((genre) => {
-    genresContainer.append(createGenreCheckbox(genre));
-  });
 }
 
 function createGenreCheckbox(genre) {
@@ -66,13 +58,13 @@ function createMovieCard(movie) {
 
   return `
     <div class="col-12 col-sm-6 col-lg-4 pb-4">
-        <div class="card justify-content-center align-items-center">
+        <div class="card justify-content-center align-items-center h-100">
           <img src="${
             movie.poster_path
               ? 'https://image.tmdb.org/t/p/w200' + movie.poster_path
               : './images/no-cover.png'
           }" class="card-img-top" alt="" />
-          <div class="card-body">
+          <div class="card-body w-100">
             <div class="d-flex justify-content-between">
                 <span class="badge badge-pill badge-warning initial-view">Raiting: ${
                   movie.vote_average
@@ -82,7 +74,7 @@ function createMovieCard(movie) {
                 }</span>
             </div>
             <span class="badge badge-pill badge-primary initial-view">${movieGenres}</span>
-            <h5 class="card-title">${movie.title}</h5>
+            <h5 class="card-title text-center">${movie.title}</h5>
             <p class="card-text d-none">
               ${movie.overview}
             </p>
@@ -112,6 +104,18 @@ function filterMovies() {
   getDataByUrl(moviesUrl + '&' + filters, (response) => {
     appendMovies(response.results);
   });
+}
+
+function setupEventListeners() {
+  $('#initial-view').on('click', () => {
+    updateView('#initial-view');
+  });
+
+  $('#detail-view').on('click', () => {
+    updateView('#detail-view');
+  });
+
+  $('#filters-submit').on('click', filterMovies);
 }
 
 function updateView(viewId) {
