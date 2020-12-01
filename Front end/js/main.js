@@ -75,7 +75,7 @@ function createMovieCard(movie) {
                 }</span>
             </div>
             <span class="badge badge-pill badge-primary d-none d-sm-inline-block">${movieGenres}</span>
-            <h5 class="card-title text-center">${movie.title}</h5>
+            <h5 class="card-title">${movie.title}</h5>
             <p class="card-text detail-view">
               ${movie.overview}
             </p>
