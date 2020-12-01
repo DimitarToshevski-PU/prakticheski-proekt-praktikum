@@ -59,12 +59,16 @@ function createGenreCheckbox(genre) {
 
 function createMovieCard(movie) {
   const movieGenres = movie.genre_ids.map((id) => genres[id]);
+
   return `
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-4">
         <div class="card justify-content-center align-items-center">
           <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" class="card-img-top" alt="..." />
           <div class="card-body">
-            <span class="badge badge-pill badge-warning initial-view">Raiting: ${movie.vote_average}</span>
+            <div class="d-flex justify-content-between">
+                <span class="badge badge-pill badge-warning initial-view">Raiting: ${movie.vote_average}</span>
+                <span class="badge badge-pill badge-warning initial-view">Date: ${movie.release_date}</span>
+            </div>
             <div>
                 <span class="badge badge-pill badge-primary initial-view">${movieGenres}</span>
             </div>
