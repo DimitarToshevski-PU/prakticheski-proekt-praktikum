@@ -65,7 +65,9 @@ function createMovieCard(movie) {
           <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" class="card-img-top" alt="..." />
           <div class="card-body">
             <span class="badge badge-pill badge-warning initial-view">Raiting: ${movie.vote_average}</span>
-            <span class="badge badge-pill badge-primary initial-view ml-5">Genre: ${movieGenres}</span>
+            <div>
+                <span class="badge badge-pill badge-primary initial-view">${movieGenres}</span>
+            </div>
             <h5 class="card-title">${movie.title}</h5>
             <p class="card-text detail-view">
               ${movie.overview}
