@@ -33,9 +33,13 @@ function appendMovies(movies) {
 
   moviesContainer.empty();
 
-  movies.forEach((movie) => {
-    moviesContainer.append(createMovieCard(movie));
-  });
+  if (movies.length) {
+    movies.forEach((movie) => {
+      moviesContainer.append(createMovieCard(movie));
+    });
+  } else {
+    moviesContainer.text('No movies have been found for the current filters.');
+  }
 }
 
 function appendGenres(genres) {
@@ -61,7 +65,7 @@ function createMovieCard(movie) {
   const movieGenres = movie.genre_ids.map((id) => genres[id]);
 
   return `
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-4">
+    <div class="col-12 col-sm-6 col-lg-4 pb-4">
         <div class="card justify-content-center align-items-center">
           <img src="${
             movie.poster_path
@@ -79,7 +83,7 @@ function createMovieCard(movie) {
             </div>
             <span class="badge badge-pill badge-primary initial-view">${movieGenres}</span>
             <h5 class="card-title">${movie.title}</h5>
-            <p class="card-text detail-view">
+            <p class="card-text d-none">
               ${movie.overview}
             </p>
           </div>
@@ -91,10 +95,16 @@ function getDataByUrl(url, cb) {
   $.ajax({
     url: url,
     success: cb,
+    error: (err) => {
+      alert(err.responseJSON.status_message);
+    },
   });
 }
 
 function filterMovies() {
+  // If there are multiple filters, leave the first key "with_genres" and replace
+  // the &with_genres with just commas so that it is represented as a single key with multiple values
+  // ex. with_genres=1&with_genres=2 => with_genres=1,2
   const filters = $('#filters-form')
     .serialize()
     .replaceAll(/&with_genres=/g, ',');
