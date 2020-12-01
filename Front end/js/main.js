@@ -122,6 +122,7 @@ function setupEventListeners() {
 
 function updateView(viewId) {
   chosenViewId = viewId;
+
   $(viewId).siblings('li').children('a').removeClass('active');
   $(viewId + ' a').addClass('nav-link active');
 
