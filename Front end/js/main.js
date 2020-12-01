@@ -128,15 +128,15 @@ function updateView(viewId) {
 
   if (viewId === '#initial-view') {
     $('.card').removeClass('flex-lg-row');
+    $('.card').parent().removeClass('col-lg-6');
     $('.card-body').removeClass('mt-3 mt-lg-0');
     $('.detail-view').css({ display: 'none' });
-    $('.badge-holder').css({ left: '0' });
     $('.card-img-top').css({ width: '100%', 'margin-left': '0' });
   } else {
     $('.card').addClass('flex-lg-row');
+    $('.card').parent().addClass('col-lg-6');
     $('.card-body').addClass('mt-3 mt-lg-0');
     $('.detail-view').css({ display: 'flex' });
-    $('.badge-holder').css({ left: '-120px' });
     $('.card-img-top').css({ width: '100px', 'margin-left': '20px' });
   }
 }
