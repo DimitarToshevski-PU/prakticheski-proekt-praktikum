@@ -20,7 +20,67 @@
   </head>
   <body>
     <main class="p-1 pt-2 p-sm-5">
-      <header id="filters"></header>
+      <header id="filters" class="mb-3">
+        <form id="filters-form">
+          <fieldset class="border border-dark radius">
+            <legend class="text-center w-25">Filters:</legend>
+            <div class="d-flex">
+              <div class="form-group col-xl-4">
+                <label
+                  for="genres-container"
+                  class="text-center w-100 font-weight-bold"
+                  >Filter movies by genres</label
+                >
+                <div id="genres-container" class="d-flex flex-wrap"></div>
+              </div>
+
+              <div class="form-group col-xl-4">
+                <label
+                  for="years-select"
+                  class="text-center w-100 font-weight-bold"
+                  >Filter movies by year</label
+                >
+                <select
+                  name="primary_release_year"
+                  id="years-select"
+                  class="form-control"
+                >
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                </select>
+              </div>
+
+              <div class="form-group col-xl-4">
+                <label
+                  for="sort-select"
+                  class="text-center w-100 font-weight-bold"
+                  >Sort movies by</label
+                >
+                <select name="sort_by" id="sort-select" class="form-control">
+                  <option value="popularity.desc">Popularity</option>
+                  <option value="vote_average.desc">Rating</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-center">
+              <button class="btn btn-warning" id="filters-submit" type="button">
+                Submit filters
+              </button>
+            </div>
+          </fieldset>
+        </form>
+
+        <ul class="nav nav-tabs mt-3 justify-content-center">
+          <li class="nav-item cursor-pointer" id="initial-view">
+            <a class="nav-link active">Initial view</a>
+          </li>
+          <li class="nav-item cursor-pointer" id="detail-view">
+            <a class="nav-link">Detail view</a>
+          </li>
+        </ul>
+      </header>
       <div
         id="movies-container"
         class="d-flex flex-wrap justify-content-around"
