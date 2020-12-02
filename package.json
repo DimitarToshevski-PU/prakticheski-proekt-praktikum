@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Практически проект - практикум",
   "scripts": {
-    "start": "gulp scss && gulp watch"
+    "start": "cd front-end && gulp scss && gulp watch"
   },
   "repository": {
     "type": "git",
