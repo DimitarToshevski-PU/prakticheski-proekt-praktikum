@@ -47,7 +47,7 @@ function createGenreCheckbox(genre) {
   return `
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="with_genres" value="${genre.id}" />
+            <input type="checkbox" name="${genre.id}" value="${genre.id}" />
             <span class="ml-1">${genre.name}</span>
           </label>
         </div>
@@ -94,15 +94,26 @@ function getDataByUrl(url, cb) {
   });
 }
 
-function filterMovies() {
-  // If there are multiple filters, leave the first key "with_genres" and replace
-  // the &with_genres with just commas so that it is represented as a single key with multiple values
-  // ex. with_genres=1&with_genres=2 => with_genres=1,2
-  const filters = $('#filters-form')
-    .serialize()
-    .replaceAll(/&with_genres=/g, ',');
+function filterMovies(event) {
+  event.preventDefault();
 
-  getDataByUrl(moviesUrl + '&' + filters, (response) => {
+  let genreFilters = '';
+  let yearsFilters = '&primary_release_year=' + $('#years-select').val();
+  let sortByFilters = '&sort_by=' + $('#sort-select').val();
+
+  const selectedGenres = $('input[type="checkbox"]:checked').serializeArray();
+
+  selectedGenres.forEach((genre) => {
+    genreFilters += genre.value + ',';
+  });
+
+  if (genreFilters.length) {
+    genreFilters = '&with_genres=' + genreFilters.slice(0, -1);
+  }
+
+  const filters = genreFilters + yearsFilters + sortByFilters;
+
+  getDataByUrl(moviesUrl + filters, (response) => {
     appendMovies(response.results);
     updateView(chosenViewId);
   });
@@ -117,7 +128,7 @@ function setupEventListeners() {
     updateView('#detail-view');
   });
 
-  $('#filters-submit').on('click', filterMovies);
+  $('#filters-form').on('submit', filterMovies);
 }
 
 function updateView(viewId) {
