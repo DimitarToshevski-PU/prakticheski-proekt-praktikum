@@ -108,6 +108,7 @@ function filterMovies(event) {
   });
 
   if (genreFilters.length) {
+    // if there are genres to filter by add the filter and remove the last comma
     genreFilters = '&with_genres=' + genreFilters.slice(0, -1);
   }
 
