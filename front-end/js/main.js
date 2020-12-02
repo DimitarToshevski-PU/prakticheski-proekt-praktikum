@@ -3,7 +3,7 @@ const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_K
 const moviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 
 let genres = {};
-let chosenViewId;
+let chosenViewId = '#initial-view';
 
 $(document).ready(function () {
   getDataByUrl(genresUrl, (response) => {
